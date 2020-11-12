@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+React App of famous 'Tower of Hanoi' puzzle. See [Wiki Page](https://en.wikipedia.org/wiki/Tower_of_Hanoi)
+
+Demo Link -> https://tower-of-hanoi-puzzle.netlify.app/
+
+## JS Stack
+
+- React
+- Styled Components
+- React DnD
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
