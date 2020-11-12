@@ -12,7 +12,7 @@ const DroppableRod = ({ name, children, ...props }) => {
       // prevent dragging large disk onto smaller disk
       const targetRod = hanoiState[name];
       if (targetRod.length !== 0) {
-        const targetRodsTopDisk = targetRod[targetRod.length - 1];
+        const targetRodsTopDisk = targetRod[0];
         if (targetRodsTopDisk.size > item.size) {
           return false;
         }

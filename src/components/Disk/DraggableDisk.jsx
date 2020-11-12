@@ -10,6 +10,7 @@ const DraggableDisk = (props) => {
       diskId: props.diskId,
       rod: props.rod,
       size: props.size,
+      color: props.color,
     },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
