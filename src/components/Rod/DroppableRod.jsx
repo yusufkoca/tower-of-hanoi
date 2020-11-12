@@ -13,7 +13,7 @@ const DroppableRod = ({ name, children, ...props }) => {
       const targetRod = hanoiState[name];
       if (targetRod.length !== 0) {
         const targetRodsTopDisk = targetRod[targetRod.length - 1];
-        if (targetRodsTopDisk.size < item.size) {
+        if (targetRodsTopDisk.size > item.size) {
           return false;
         }
       }
@@ -27,7 +27,7 @@ const DroppableRod = ({ name, children, ...props }) => {
     }),
   });
   const isActive = canDrop && isOver;
-  let backgroundColor = "#222";
+  let backgroundColor = "aliceblue";
   if (isActive) {
     backgroundColor = "darkgreen";
   } else if (canDrop) {

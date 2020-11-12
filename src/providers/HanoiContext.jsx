@@ -7,9 +7,10 @@ HanoiContext.displayName = "HanoiContext";
 function init(initialSize) {
   const disks = [];
   for (let i = 1; i <= initialSize; i++) {
-    disks.push({ id: i, size: i, color: pickAColor() });
+    disks.push({ id: i, size: initialSize - i, color: pickAColor() });
   }
   return {
+    step: 0,
     size: initialSize,
     src: disks,
     aux: [],
@@ -26,6 +27,7 @@ const reducer = (state, action) => {
       const diskIndex = state[from].findIndex((disk) => disk.id === diskId);
       newState[to].unshift(state[from][diskIndex]);
       newState[from].splice(diskIndex, 1);
+      newState.step++;
       return newState;
     case "RESET":
       return init(action.payload.initialSize);

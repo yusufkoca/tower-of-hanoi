@@ -7,6 +7,10 @@ const Rod = styled.div`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding-left: 4px;
+  padding-right: 4px;
 `;
 
 export default Rod;
