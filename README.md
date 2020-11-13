@@ -1,3 +1,5 @@
+![Tower of Hanoi walkthrough gif](hanoi.gif)
+
 React App of famous 'Tower of Hanoi' puzzle. See [Wiki Page](https://en.wikipedia.org/wiki/Tower_of_Hanoi)
 
 Demo Link -> https://tower-of-hanoi-puzzle.netlify.app/
