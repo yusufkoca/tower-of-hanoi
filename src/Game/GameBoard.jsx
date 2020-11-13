@@ -20,7 +20,7 @@ const Board = styled.div`
 `;
 const DiskPreview = () => {
   // It is needed since touch support disables auto preview
-  const { display, itemType, item, style } = usePreview();
+  const { display, item, style } = usePreview();
   if (!display) {
     return null;
   }
