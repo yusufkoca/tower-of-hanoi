@@ -10,11 +10,11 @@ function init(initialSize) {
     disks.push({ id: i, size: initialSize - i, color: pickAColor() });
   }
   return {
-    step: 0,
     size: initialSize,
     src: disks,
     aux: [],
     dest: [],
+    moves: [],
   };
 }
 
@@ -25,10 +25,13 @@ const reducer = (state, action) => {
       const { diskId, from, to } = payload;
       const newState = { ...state };
       const diskIndex = state[from].findIndex((disk) => disk.id === diskId);
-      newState[to].unshift(state[from][diskIndex]);
-      newState[from].splice(diskIndex, 1);
-      newState.step++;
-      return newState;
+      if (diskIndex >= 0) {
+        newState[to].unshift(state[from][diskIndex]);
+        newState[from].splice(diskIndex, 1);
+        newState.moves.push({ diskId, from, to });
+        return newState;
+      }
+      return state;
     case "RESET":
       return init(action.payload.initialSize);
     default:

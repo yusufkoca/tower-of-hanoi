@@ -10,6 +10,7 @@ import Button from "../components/Button";
 import { useHanoi } from "../providers/HanoiContext";
 import GameResult from "./GameResult";
 import { usePreview } from "react-dnd-preview";
+import solveHanoi from "../utils/solveHanoi";
 
 const Board = styled.div`
   height: 95%;
@@ -34,10 +35,51 @@ const DiskPreview = () => {
     </Disk>
   );
 };
+
 const GameBoard = () => {
-  const { state: hanoiState, checkGameOverStatus, restartGame } = useHanoi();
+  const {
+    state: hanoiState,
+    checkGameOverStatus,
+    restartGame,
+    moveDisk,
+  } = useHanoi();
+
+  // can be used to perform a simulation of users own solution
+  const simulateSolution = (moves) => {
+    const INTERVAL = 1000; // in milliseconds
+    moves.forEach((move, index) => {
+      setTimeout(() => {
+        moveDisk(move);
+      }, INTERVAL * index);
+    });
+  };
+
+  const solvePuzzle = () => {
+    const simulationMoves = [];
+    solveHanoi(hanoiState.size, "src", "dest", "aux", simulationMoves);
+    simulateSolution(simulationMoves);
+  };
+
   return (
     <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
+      <div
+        style={{
+          position: "absolute",
+          left: 0,
+          right: 0,
+          margin: "auto",
+          width: "fit-content",
+          top: "10%",
+          display: "flex",
+        }}
+      >
+        {hanoiState.moves.length === 0 && (
+          <Button onClick={() => solvePuzzle()}>Solve Puzzle</Button>
+        )}
+
+        <Button onClick={() => restartGame()}>Restart</Button>
+      </div>
+
       <Modal
         isOpen={checkGameOverStatus()}
         contentLabel="Game Result"
@@ -78,8 +120,8 @@ const GameBoard = () => {
       </Board>
       <Ground>
         <span style={{ margin: "2%" }}>Tower of Hanoi</span>
-        <span>Step: {hanoiState.step}</span>
-        <Button onClick={() => restartGame()}>Restart</Button>
+        <span>Step: {hanoiState.moves.length}</span>
+        <span style={{ margin: "2%" }}>Timer: </span>
       </Ground>
     </DndProvider>
   );
